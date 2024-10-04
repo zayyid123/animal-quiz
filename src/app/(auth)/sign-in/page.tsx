@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import ParticlesComponent from "@/components/ParticlesComponent";
 import Link from "next/link";
 import React, { useState } from "react";
@@ -6,6 +6,7 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { fbConfig } from "@/config/firebaseConfig";
 import AlertCustom from "@/components/AlertCustom";
 import { useRouter } from "next/navigation";
+import CookieManager from "@/utils/CookieManager";
 
 const auth = getAuth(fbConfig);
 
@@ -21,6 +22,7 @@ type AlertProps = {
 
 const SignInPage = () => {
   const router = useRouter();
+  const cookieManager = new CookieManager();
   const [dataSignIn, setdataSignIn] = useState<SignInData>({
     email: "",
     password: "",
@@ -37,13 +39,16 @@ const SignInPage = () => {
 
   const handleSignInWithEmail = async (email: string, password: string) => {
     signInWithEmailAndPassword(auth, email, password)
-      .then(() => {
+      .then((userCredential) => {
         // Signed in
+        const user = userCredential.user;
         setalertData({
           message: "Success Sign In",
           type: "success",
         });
         setisOpenAlert(true);
+        console.log(user)
+        cookieManager.setCookie("access_token", user, 1);
         setTimeout(() => {
           router.push("/");
         }, 2000);
