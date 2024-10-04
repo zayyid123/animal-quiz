@@ -1,8 +1,63 @@
+"use client"
 import ParticlesComponent from "@/components/ParticlesComponent";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { fbConfig } from "@/config/firebaseConfig";
+import AlertCustom from "@/components/AlertCustom";
+import { useRouter } from "next/navigation";
+
+const auth = getAuth(fbConfig);
+
+type SignInData = {
+  email: string;
+  password: string;
+};
+
+type AlertProps = {
+  message: string;
+  type: "warning" | "danger" | "success";
+};
 
 const SignInPage = () => {
+  const router = useRouter();
+  const [dataSignIn, setdataSignIn] = useState<SignInData>({
+    email: "",
+    password: "",
+  });
+  const [isOpenAlert, setisOpenAlert] = useState(false);
+  const [alertData, setalertData] = useState<AlertProps>({
+    message: "",
+    type: "success",
+  });
+
+  const handleChangeInput = (value: string, key: string) => {
+    setdataSignIn({ ...dataSignIn, [key]: value });
+  };
+
+  const handleSignInWithEmail = async (email: string, password: string) => {
+    signInWithEmailAndPassword(auth, email, password)
+      .then(() => {
+        // Signed in
+        setalertData({
+          message: "Success Sign In",
+          type: "success",
+        });
+        setisOpenAlert(true);
+        setTimeout(() => {
+          router.push("/");
+        }, 2000);
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        setalertData({
+          message: errorMessage,
+          type: "danger",
+        });
+        setisOpenAlert(true);
+      });
+  };
+
   return (
     <section className="h-screen">
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto h-screen lg:py-0">
@@ -11,7 +66,14 @@ const SignInPage = () => {
             <h1 className="text-xl text-center font-bold leading-tight tracking-tight text-white drop-shadow md:text-2xl">
               Animal<span className="text-primary-600">Quizz</span>
             </h1>
-            <form className="space-y-4 md:space-y-6" action="#">
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                handleSignInWithEmail(dataSignIn.email, dataSignIn.password);
+              }}
+              className="space-y-4 md:space-y-6"
+              action="#"
+            >
               <div>
                 <label
                   htmlFor="email"
@@ -25,6 +87,7 @@ const SignInPage = () => {
                   id="email"
                   className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                   placeholder="name@company.com"
+                  onChange={(e) => handleChangeInput(e.target.value, "email")}
                   required
                 />
               </div>
@@ -41,6 +104,9 @@ const SignInPage = () => {
                   id="password"
                   placeholder="••••••••"
                   className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                  onChange={(e) =>
+                    handleChangeInput(e.target.value, "password")
+                  }
                   required
                 />
               </div>
@@ -66,6 +132,14 @@ const SignInPage = () => {
 
       {/* particles */}
       <ParticlesComponent />
+
+      {/* alert custom */}
+      <AlertCustom
+        isOpen={isOpenAlert}
+        setisOpen={setisOpenAlert}
+        alertText={alertData.message}
+        type={alertData.type}
+      />
     </section>
   );
 };
