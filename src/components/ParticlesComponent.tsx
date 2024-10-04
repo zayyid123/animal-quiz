@@ -2,11 +2,18 @@
 
 import Particles from "react-tsparticles";
 import { loadSlim } from "tsparticles-slim";
-import { useCallback, useMemo } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { Engine } from "tsparticles-engine"; // Import Engine type
 import type { ISourceOptions } from "tsparticles-engine"; // Import type for options
 
 const ParticlesComponent = () => {
+  const [origin, setorigin] = useState("");
+
+  useEffect(() => {
+    if (window) {
+      setorigin(window.origin);
+    }
+  }, []);
 
   // Define options with proper typing
   const option: ISourceOptions = useMemo(() => {
@@ -27,7 +34,7 @@ const ParticlesComponent = () => {
           straight: false, // Non-linear motion
         },
         number: {
-          value: 30
+          value: 15,
         },
         opacity: {
           value: 1,
@@ -43,37 +50,117 @@ const ParticlesComponent = () => {
           },
           images: [
             {
-              src: "http://localhost:3000/pictures/animal/cat.png",
+              src: `${origin}/pictures/animal/cat.png`,
               width: 150,
               height: 150,
             },
             {
-              src: "http://localhost:3000/pictures/animal/chameleon.png",
+              src: `${origin}/pictures/animal/chameleon.png`,
               width: 150,
               height: 150,
             },
             {
-              src: "http://localhost:3000/pictures/animal/crab.png",
+              src: `${origin}/pictures/animal/crab.png`,
               width: 150,
               height: 150,
             },
             {
-              src: "http://localhost:3000/pictures/animal/crocodile.png",
+              src: `${origin}/pictures/animal/crocodile.png`,
               width: 150,
               height: 150,
             },
             {
-              src: "http://localhost:3000/pictures/animal/dolphin.png",
+              src: `${origin}/pictures/animal/dolphin.png`,
               width: 150,
               height: 150,
             },
             {
-              src: "http://localhost:3000/pictures/animal/elephant.png",
+              src: `${origin}/pictures/animal/elephant.png`,
               width: 150,
               height: 150,
             },
             {
-              src: "http://localhost:3000/pictures/animal/fox.png",
+              src: `${origin}/pictures/animal/fox.png`,
+              width: 150,
+              height: 150,
+            },
+            {
+              src: `${origin}/pictures/animal/frog.png`,
+              width: 150,
+              height: 150,
+            },
+            {
+              src: `${origin}/pictures/animal/giraffe.png`,
+              width: 150,
+              height: 150,
+            },
+            {
+              src: `${origin}/pictures/animal/koala.png`,
+              width: 150,
+              height: 150,
+            },
+            {
+              src: `${origin}/pictures/animal/lion.png`,
+              width: 150,
+              height: 150,
+            },
+            {
+              src: `${origin}/pictures/animal/owl.png`,
+              width: 150,
+              height: 150,
+            },
+            {
+              src: `${origin}/pictures/animal/penguin.png`,
+              width: 150,
+              height: 150,
+            },
+            {
+              src: `${origin}/pictures/animal/rabbit.png`,
+              width: 150,
+              height: 150,
+            },
+            {
+              src: `${origin}/pictures/animal/sea-turtle.png`,
+              width: 150,
+              height: 150,
+            },
+            {
+              src: `${origin}/pictures/animal/shark.png`,
+              width: 150,
+              height: 150,
+            },
+            {
+              src: `${origin}/pictures/animal/sheep.png`,
+              width: 150,
+              height: 150,
+            },
+            {
+              src: `${origin}/pictures/animal/sloth.png`,
+              width: 150,
+              height: 150,
+            },
+            {
+              src: `${origin}/pictures/animal/snail.png`,
+              width: 150,
+              height: 150,
+            },
+            {
+              src: `${origin}/pictures/animal/snake.png`,
+              width: 150,
+              height: 150,
+            },
+            {
+              src: `${origin}/pictures/animal/squirrel.png`,
+              width: 150,
+              height: 150,
+            },
+            {
+              src: `${origin}/pictures/animal/turtle.png`,
+              width: 150,
+              height: 150,
+            },
+            {
+              src: `${origin}/pictures/animal/whale.png`,
               width: 150,
               height: 150,
             },
@@ -109,6 +196,11 @@ const ParticlesComponent = () => {
           },
         },
       },
+      background: {
+        color: {
+          value: "#6d28d9"
+        }
+      }
     };
   }, []);
 
