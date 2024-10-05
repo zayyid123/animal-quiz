@@ -4,7 +4,7 @@ import {
   ChevronDownIcon,
 } from "@heroicons/react/24/outline";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { getAuth, signOut } from "firebase/auth";
 import { fbConfig } from "@/config/firebaseConfig";
 import AlertCustom from "./AlertCustom";
@@ -20,6 +20,9 @@ const Navbar = () => {
   const auth = getAuth(fbConfig);
   const router = useRouter();
   const cookieManager = new CookieManager();
+  const [userData, setuserData] = useState({
+    email: "",
+  });
   const [isOpenProfile, setisOpenProfile] = useState(false);
   const [isOpenAlert, setisOpenAlert] = useState(false);
   const [alertData, setalertData] = useState<AlertProps>({
@@ -49,31 +52,45 @@ const Navbar = () => {
         setisOpenAlert(true);
       });
   };
+
+  useEffect(() => {
+    const getDataFromCookie = () => {
+      const userDataFromCookie = JSON.parse(
+        cookieManager.getCookie("access_token") as string
+      );
+      setuserData(userDataFromCookie);
+    };
+
+    getDataFromCookie();
+  }, []);
+
   return (
-    <div className="w-full bg-white shadow-lg py-4 px-3 flex justify-between items-center">
-      <p className="text-xl text-center font-bold leading-tight tracking-tight text-gray-700 drop-shadow md:text-2xl">
+    <div className="sticky top-0 w-full glass shadow-lg py-4 px-3 flex justify-between items-center">
+      <p className="text-xl text-center font-bold leading-tight tracking-tight text-white drop-shadow md:text-2xl">
         Animal<span className="text-primary-600">Quizz</span>
       </p>
 
       <div>
         {/* user */}
         <div
-          className="group flex justify-end items-center gap-x-2 cursor-pointer text-gray-700"
+          className="group flex justify-end items-center gap-x-2 cursor-pointer text-white"
           onClick={() => setisOpenProfile(!isOpenProfile)}
         >
-          <div className="text-right">
-            <p className="text-lg text-gray-600 font-semibold whitespace-nowrap overflow-hidden text-ellipsis max-w-[100px] capitalize">
+          <div className="flex justify-center flex-col items-end">
+            <p className="text-lg text-right text-white font-semibold whitespace-nowrap overflow-hidden text-ellipsis max-w-[100px] capitalize">
               User
             </p>
-            <p className="text-xs text-gray-500 capitalize">Pengunjung</p>
+            <p className="text-xs text-white whitespace-nowrap overflow-hidden text-ellipsis max-w-[70px]">{userData?.email}</p>
           </div>
-          <Image
-            src={"/pictures/animal/cat.png"}
-            width={100}
-            height={100}
-            alt="profile"
-            className="w-[20%] object-cover"
-          />
+          <div className="w-10 h-10 overflow-hidden rounded-full bg-primary-700 flex justify-center items-center">
+            <Image
+              src={"/pictures/animal/koala.png"}
+              width={100}
+              height={100}
+              alt="profile"
+              className="w-[40px] h-[40px] object-cover"
+            />
+          </div>
           <div>
             <ChevronDownIcon
               className={`w-5 h-5 ease-in-out duration-300 ${
