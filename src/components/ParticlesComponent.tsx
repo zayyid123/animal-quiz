@@ -196,11 +196,11 @@ const ParticlesComponent = () => {
           },
         },
       },
-      background: {
-        color: {
-          value: "#6d28d9"
-        }
-      }
+      // background: {
+      //   color: {
+      //     value: "#6d28d9"
+      //   }
+      // }
     };
   }, []);
 
@@ -210,7 +210,13 @@ const ParticlesComponent = () => {
     // loadFull(engine) can be used instead of loadSlim if you need the full version
   }, []);
 
-  return <Particles id="tsparticles" init={particlesInit} options={option} />;
+  return (
+    <>
+      <Particles id="tsparticles" init={particlesInit} options={option} />
+      {/* bg */}
+      <div className="w-full h-full absolute top-0 right-0 -z-10 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"></div>
+    </>
+  );
 };
 
 export default ParticlesComponent;
