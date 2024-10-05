@@ -59,18 +59,23 @@ export default function Home() {
         return;
       }
 
-      // manage Question
-      const finalQuesstion: object[] = [];
+      // manage Answer
+      const finalAnswer: object[] = [];
       response.data.results.map(
-        (res: { incorrect_answers: string[]; correct_answer: string }) => {
+        (res: {
+          incorrect_answers: string[];
+          correct_answer: string;
+          question: string;
+        }) => {
           // manage array
-          const question = res.incorrect_answers;
-          question.push(res.correct_answer);
+          const answer = res.incorrect_answers;
+          answer.push(res.correct_answer);
 
-          const shuffledQuestion = shuffleArray(question);
+          const shuffledAnswer = shuffleArray(answer);
 
-          finalQuesstion.push({
-            question: shuffledQuestion,
+          finalAnswer.push({
+            question: res.question,
+            answer: shuffledAnswer,
             correct_answer: res.correct_answer,
           });
         }
@@ -84,7 +89,7 @@ export default function Home() {
       localStorageManager.addToLocalStorage("quiz_active", {
         name,
         difficult,
-        finalQuesstion,
+        allAnswerAndQuestion: finalAnswer,
         startDate,
         endDate,
       });
