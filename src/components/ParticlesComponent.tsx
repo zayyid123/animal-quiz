@@ -214,7 +214,7 @@ const ParticlesComponent = () => {
     <>
       <Particles id="tsparticles" init={particlesInit} options={option} />
       {/* bg */}
-      <div className="w-full h-full absolute top-0 right-0 -z-10 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"></div>
+      <div className="w-full h-screen absolute top-0 right-0 -z-10 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"></div>
     </>
   );
 };
