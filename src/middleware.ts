@@ -15,6 +15,7 @@ export function middleware(request: NextRequest) { // Define request as type Nex
 
 export const config = {
   matcher: [
-    '/', // Paths to match
+    '/',
+    '/active'
   ],
 };
