@@ -39,7 +39,7 @@ const ActivePage = () => {
                   index === 2 && "bg-[#F0AC31] hover:bg-[#f0c575]"
                 } ${
                   index === 3 && "bg-[#D65972] hover:bg-[#ee627e]"
-                } text-center flex justify-center items-center p-3 rounded-lg ease-in-out duration-300 cursor-pointer`}
+                } text-center flex justify-center items-center p-3 rounded-lg ease-in-out duration-100 cursor-pointer`}
               >
                 <p>{res}</p>
               </div>
@@ -57,14 +57,14 @@ const ActivePage = () => {
         <div
           className={`relative bg-white h-[90%] w-[300px] ${
             isOpenQuestion ? "right-0" : "right-[300px]"
-          } rounded-r-lg shadow my-auto p-5 ease-in-out duration-300`}
+          } rounded-r-lg shadow my-auto p-5 ease-in-out duration-100`}
         >
           {/* question */}
           <div className="flex h-full justify-between items-center gap-x-4 flex-wrap pr-10 w-[270px]">
             {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((res, index) => (
               <div
                 key={"KotakQuestion" + index}
-                className="bg-slate-500 text-center text-white w-[60px] h-[60px] flex justify-center items-center cursor-pointer hover:bg-slate-300 ease-in-out duration-300"
+                className="bg-slate-500 text-center text-white w-[60px] h-[60px] flex justify-center items-center cursor-pointer hover:bg-slate-300 ease-in-out duration-100"
               >
                 <div>{res}</div>
               </div>
@@ -78,7 +78,7 @@ const ActivePage = () => {
             }}
             className={`absolute top-5 ${
               isOpenQuestion ? "-right-4" : "-right-10"
-            } bg-slate-800 text-white w-10 text-center flex justify-center items-center py-2 cursor-pointer hover:bg-slate-600 ease-in-out duration-300`}
+            } bg-slate-800 text-white w-10 text-center flex justify-center items-center py-2 cursor-pointer hover:bg-slate-600 ease-in-out duration-100`}
           >
             <ChevronRightIcon
               className={`w-5 h-5 ${isOpenQuestion && "rotate-180"}`}
@@ -90,7 +90,7 @@ const ActivePage = () => {
         <div
           className={`w-full h-full bg-[#4e4e4e9c] absolute top-0 ${
             isOpenQuestion ? "right-0" : "right-[100%]"
-          } -z-10 ease-in-out duration-300`}
+          } -z-10 ease-in-out duration-100`}
         ></div>
       </div>
     </div>
