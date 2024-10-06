@@ -55,12 +55,12 @@ const ActivePage = () => {
         } h-screen flex items-center`}
       >
         <div
-          className={`relative bg-white h-[90%] ${
-            isOpenQuestion ? "w-[300px]" : "right-10 w-0"
-          } rounded-r-lg shadow my-auto p-5`}
+          className={`relative bg-white h-[90%] w-[300px] ${
+            isOpenQuestion ? "right-0" : "right-[300px]"
+          } rounded-r-lg shadow my-auto p-5 ease-in-out duration-300`}
         >
           {/* question */}
-          <div className="flex w-full h-full justify-between items-center gap-x-4 flex-wrap pr-10">
+          <div className="flex h-full justify-between items-center gap-x-4 flex-wrap pr-10 w-[270px]">
             {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((res, index) => (
               <div
                 key={"KotakQuestion" + index}
