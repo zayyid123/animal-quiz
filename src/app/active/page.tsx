@@ -8,11 +8,11 @@ const ActivePage = () => {
   return (
     <div className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 w-full h-full min-h-screen pt-4">
       <div className="w-full h-full flex justify-center items-center flex-col gap-y-2">
-        <div className="w-[96%] max-w-[1080px] mb-2 flex justify-between items-center">
-          <div className="bg-slate-800 w-[90%] h-16 rounded-lg">
+        <div className="w-[96%] max-w-[1080px] mb-2 flex justify-between items-center gap-x-3">
+          <div className="bg-slate-800 w-full h-16 rounded-lg">
             <div className="h-full w-[30%] bg-green-500 rounded-lg"></div>
           </div>
-          <div className="bg-green-500 w-[9%] h-full p-5 rounded-lg text-center">
+          <div className="bg-green-500 w-[70px] h-full p-5 rounded-lg text-center">
             1.00
           </div>
         </div>
@@ -33,7 +33,7 @@ const ActivePage = () => {
             {[1, 2, 3, 4].map((res, index) => (
               <div
                 key={"hello" + index}
-                className={`w-[49%] h-40 ${
+                className={`md:w-[49%] w-[48%] h-40 ${
                   index === 0 && "bg-[#3474B1] hover:bg-[#4192dd]"
                 } ${index === 1 && "bg-[#3FA0A9] hover:bg-[#4dc1cc]"} ${
                   index === 2 && "bg-[#F0AC31] hover:bg-[#eebc60]"
@@ -51,10 +51,10 @@ const ActivePage = () => {
       {/* sidebar */}
       <div
         className={`fixed top-0 ${
-          isOpenQuestion ? "right-0" : "right-[35%]"
+          isOpenQuestion ? "right-0" : "right-[200px]"
         } w-full h-screen flex items-center ease-in-out duration-300`}
       >
-        <div className="relative bg-white h-[90%] w-[35%] rounded-r-lg shadow my-auto p-5">
+        <div className="relative bg-white h-[90%] w-[200px] rounded-r-lg shadow my-auto p-5">
           {/* btn */}
           <div
             onClick={() => {
