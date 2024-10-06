@@ -2,13 +2,14 @@
 import AlertCustom from "@/components/AlertCustom";
 import Navbar from "@/components/Navbar";
 import ParticlesComponent from "@/components/ParticlesComponent";
-import { getAllQuiz } from "@/services/quiz.service";
+import { getAllQuiz, getAllQuizzes } from "@/services/quiz.service";
+import CookieManager from "@/utils/CookieManager";
 import getCurrentAndEndDate from "@/utils/getCurrentAndEndDate";
 import LocalStorageManager from "@/utils/LocalStorageManager";
 import shuffleArray from "@/utils/shuffleArray";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import usePortal from "react-useportal";
 
 type DataQuiz = {
@@ -24,6 +25,7 @@ type AlertProps = {
 export default function Home() {
   const { Portal } = usePortal();
   const router = useRouter();
+  const cookieManager = new CookieManager();
   const localStorageManager = new LocalStorageManager();
   const [isOpenStartQuiz, setisOpenStartQuiz] = useState<boolean>(false);
   const [isLoading, setisLoading] = useState<boolean>(false);
@@ -107,6 +109,17 @@ export default function Home() {
       setisOpenAlert(true);
     }
   };
+
+  useEffect(() => {
+    const getAlluizFromDb = async () => {
+      const cookieUser = cookieManager.getCookie("access_token") as string;
+      const userId = JSON.parse(cookieUser).uid;
+      const res = await getAllQuizzes(userId);
+      console.log(res);
+    };
+
+    getAlluizFromDb();
+  }, []);
 
   return (
     <div className="w-full h-full">
