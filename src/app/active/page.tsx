@@ -191,6 +191,7 @@ const ActivePage = ({ searchParams }: { searchParams: { page: string } }) => {
               {searchParams.page !== "final" ? (
                 <>
                   <div className="bg-white rounded-lg text-slate-700 p-3">
+                    {parseInt(searchParams.page)}.{" "}
                     {
                       activeQuestion.allAnswerAndQuestion[
                         parseInt(searchParams.page) - 1

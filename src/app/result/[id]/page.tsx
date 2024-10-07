@@ -57,16 +57,16 @@ const ResultPage = ({ params }: { params: { id: string } }) => {
               </h1>
 
               <h2 className="text-center capitalize">
-                <span className="font-bold">Start: </span>{allDatauiz.startDate}
+                <span className="font-bold">Start: </span>
+                {allDatauiz.startDate}
               </h2>
 
               <h2 className="text-center capitalize">
-                <span className="font-bold">End: </span>{allDatauiz.endDate}
+                <span className="font-bold">End: </span>
+                {allDatauiz.endDate}
               </h2>
 
-              <h2 className="text-center capitalize">
-                {allDatauiz.difficult}
-              </h2>
+              <h2 className="text-center capitalize">{allDatauiz.difficult}</h2>
             </>
           )}
 
@@ -75,7 +75,7 @@ const ResultPage = ({ params }: { params: { id: string } }) => {
               <div className="flex justify-center items-start gap-x-4">
                 <div className="flex justify-center items-center flex-col text-center">
                   <p className="font-bold text-xl">Benar:</p>
-                  <p className="text-3xl font-bold text-blue-600">
+                  <p className="text-3xl font-bold text-green-600">
                     {allScore.correct}
                   </p>
                 </div>
@@ -88,7 +88,18 @@ const ResultPage = ({ params }: { params: { id: string } }) => {
               </div>
               <div className="flex justify-center items-center flex-col text-center mt-4">
                 <p className="font-bold text-xl">Total Score:</p>
-                <p className="text-6xl font-bold text-green-600">
+                <p
+                  className="text-6xl font-bold"
+                  style={{
+                    color: `${
+                      allScore.totalScore > 80
+                        ? "#22c55e" // hijau
+                        : allScore.totalScore >= 60
+                        ? "#ffe347" // kuning
+                        : "#ff4747" // merah
+                    }`,
+                  }}
+                >
                   {allScore.totalScore}
                 </p>
               </div>
