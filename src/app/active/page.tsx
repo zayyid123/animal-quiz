@@ -150,9 +150,6 @@ const ActivePage = ({ searchParams }: { searchParams: { page: string } }) => {
     return () => clearInterval(timerInterval);
   }, [activeQuestion?.endDate]);
 
-  console.log(searchParams.page)
-  console.log(activeQuestion)
-
 
   return (
     <div className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 w-full h-full min-h-screen pt-4">
