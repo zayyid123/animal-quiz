@@ -92,7 +92,7 @@ const ActivePage = ({ searchParams }: { searchParams: { page: string } }) => {
   useEffect(() => {
     const getActiveQuestion = () => {
       const quizActive =
-        localStorageManager.getFromLocalStorage("quiz_active") || {};
+        localStorageManager.getFromLocalStorage("quiz_active");
       if (quizActive) {
         setActiveQuestion(quizActive);
       } else {
