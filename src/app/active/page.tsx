@@ -45,28 +45,6 @@ const ActivePage = ({ searchParams }: { searchParams: { page: string } }) => {
   const [timeLeft, setTimeLeft] = useState<string>("");
   const [percentageLeft, setPercentageLeft] = useState<number>(100);
 
-  // Get active question
-  useEffect(() => {
-    const getActiveQuestion = () => {
-      const quizActive = localStorageManager.getFromLocalStorage("quiz_active");
-      if (quizActive) {
-        setActiveQuestion(quizActive);
-      } else {
-        setAlertData({
-          message: "Tolong buat quis baru",
-          type: "danger",
-        });
-        setIsOpenAlert(true);
-
-        setTimeout(() => {
-          router.push("/");
-        }, 1000);
-      }
-    };
-
-    getActiveQuestion();
-  }, []);
-
   const selectAnswer = (page: number, value: string) => {
     const newArray: object[] = JSON.parse(
       JSON.stringify(
@@ -110,6 +88,28 @@ const ActivePage = ({ searchParams }: { searchParams: { page: string } }) => {
     }
   };
 
+  // Get active question
+  useEffect(() => {
+    const getActiveQuestion = () => {
+      const quizActive = localStorageManager.getFromLocalStorage("quiz_active");
+      if (quizActive) {
+        setActiveQuestion(quizActive);
+      } else {
+        setAlertData({
+          message: "Tolong buat quis baru",
+          type: "danger",
+        });
+        setIsOpenAlert(true);
+
+        setTimeout(() => {
+          router.push("/");
+        }, 1000);
+      }
+    };
+
+    getActiveQuestion();
+  }, []);
+
   useEffect(() => {
     if (!activeQuestion?.endDate) return;
 
@@ -150,7 +150,6 @@ const ActivePage = ({ searchParams }: { searchParams: { page: string } }) => {
     return () => clearInterval(timerInterval);
   }, [activeQuestion?.endDate]);
 
-
   return (
     <div className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 w-full h-full min-h-screen pt-4">
       <div className="w-full h-full flex justify-center items-center flex-col gap-y-2">
@@ -186,7 +185,10 @@ const ActivePage = ({ searchParams }: { searchParams: { page: string } }) => {
           </div>
         </div>
 
-        <div className="glass w-[96%] h-full mb-4 p-5 rounded-lg text-white max-w-[1080px]">
+        <div
+          key={JSON.stringify(activeQuestion)}
+          className="glass w-[96%] h-full mb-4 p-5 rounded-lg text-white max-w-[1080px]"
+        >
           {activeQuestion && searchParams.page ? (
             <>
               {searchParams.page !== "final" ? (
