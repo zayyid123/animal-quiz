@@ -1,5 +1,6 @@
 "use client";
 import AlertCustom from "@/components/AlertCustom";
+import CardQuizHistory from "@/components/CardQuizHistory";
 import Navbar from "@/components/Navbar";
 import ParticlesComponent from "@/components/ParticlesComponent";
 import { getAllQuiz, getAllQuizzes } from "@/services/quiz.service";
@@ -22,6 +23,22 @@ type AlertProps = {
   type: "warning" | "danger" | "success";
 };
 
+type HistoryQuiz = {
+  data: {
+    allAnswerAndQuestion: {
+      question: string;
+      answer: string[]; // Define answer type explicitly
+      correct_answer: string;
+      userAnswer: string | undefined;
+    }[];
+    difficult: "easy" | "medium" | "hard";
+    endDate: string;
+    startDate: string;
+    name: string;
+  };
+  id: string;
+};
+
 export default function Home() {
   const { Portal } = usePortal();
   const router = useRouter();
@@ -38,6 +55,7 @@ export default function Home() {
     message: "",
     type: "success",
   });
+  const [historyQuiz, sethistoryQuiz] = useState<HistoryQuiz[] | undefined>();
 
   const handleChangeInput = (value: string, key: string) => {
     setdataQuiz({ ...dataQuiz, [key]: value });
@@ -114,8 +132,8 @@ export default function Home() {
     const getAlluizFromDb = async () => {
       const cookieUser = cookieManager.getCookie("access_token") as string;
       const userId = JSON.parse(cookieUser).uid;
-      const res = await getAllQuizzes(userId);
-      console.log(res);
+      const res = (await getAllQuizzes(userId)) as HistoryQuiz[];
+      sethistoryQuiz(res);
     };
 
     getAlluizFromDb();
@@ -126,24 +144,29 @@ export default function Home() {
       <Navbar />
 
       {/* body */}
-      <div className="flex justify-center items-center mt-4">
-        <div className="bg-white w-[90%] max-w-[1080px] rounded-lg p-5">
-          <h2 className="text-center font-bold text-2xl bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 h-full bg-clip-text text-transparent">
-            Start Your Quiz
-          </h2>
+      <div className="flex justify-center items-center flex-col gap-y-4 mt-20">
+        <button
+          onClick={() => setisOpenStartQuiz(!isOpenStartQuiz)}
+          className="w-[90%] max-w-[1080px] text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+        >
+          Start New
+        </button>
 
-          {/* history */}
-          <div className="mt-5">
-            <div className="flex justify-between items-center">
-              <p className="font-semibold">Quiz History</p>
+        <div className="w-[90%] max-w-[1080px] bg-white p-5 rounded-lg">
+          <p className="text-center font-bold text-xl bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 h-full bg-clip-text text-transparent mb-4">
+            History Quiz
+          </p>
 
-              <button
-                onClick={() => setisOpenStartQuiz(!isOpenStartQuiz)}
-                className="w-fit text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-              >
-                Start New
-              </button>
-            </div>
+          {/* card */}
+          <div className="flex justify-start items-start gap-3">
+            {historyQuiz &&
+              historyQuiz.map((res, index) => (
+                <CardQuizHistory
+                  key={"QuizHistory" + index}
+                  dataQuiz={res.data}
+                  idQuiz={res.id}
+                />
+              ))}
           </div>
         </div>
       </div>
