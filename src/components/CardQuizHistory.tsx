@@ -50,7 +50,7 @@ const CardQuizHistory = ({
   return (
     <div
       key={key}
-      className="md:w-[200px] w-full h-fit rounded-lg p-5 bg-[#fac1ff] cursor-pointer relative"
+      className="md:w-[250px] w-full h-fit rounded-lg p-5 bg-[#fac1ff] cursor-pointer relative"
     >
       {/* head */}
       <div className="bg-gradient-to-r h-[100px] rounded-lg from-indigo-500 via-purple-500 to-pink-500 flex justify-center items-center hover:scale-105 ease-in-out duration-300">

@@ -65,7 +65,7 @@ const Navbar = () => {
   }, []);
 
   return (
-    <div className="sticky top-0 w-full glass shadow-lg py-4 px-3 flex justify-between items-center">
+    <div className="sticky top-0 w-full glass shadow-lg py-4 px-3 flex justify-between items-center z-10">
       <div
         onClick={() => {
           router.push("/");

@@ -6,7 +6,11 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { Engine } from "tsparticles-engine"; // Import Engine type
 import type { ISourceOptions } from "tsparticles-engine"; // Import type for options
 
-const ParticlesComponent = () => {
+const ParticlesComponent = ({
+  isUsingBackground = true,
+}: {
+  isUsingBackground?: boolean;
+}) => {
   const [origin, setorigin] = useState("");
 
   useEffect(() => {
@@ -214,7 +218,9 @@ const ParticlesComponent = () => {
     <>
       <Particles id="tsparticles" init={particlesInit} options={option} />
       {/* bg */}
-      <div className="w-full h-screen absolute top-0 right-0 -z-10 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"></div>
+      {isUsingBackground && (
+        <div className="w-full h-screen absolute top-0 right-0 -z-10 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"></div>
+      )}
     </>
   );
 };

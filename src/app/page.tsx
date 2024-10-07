@@ -160,7 +160,7 @@ export default function Home() {
           Start New
         </button>
 
-        <div className="w-[90%] max-w-[1080px] bg-white p-5 rounded-lg">
+        <div className="w-[90%] max-w-[1080px] bg-white p-5 rounded-lg mb-5">
           <p className="text-center font-bold text-xl bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 h-full bg-clip-text text-transparent mb-4">
             History Quiz
           </p>
@@ -190,7 +190,9 @@ export default function Home() {
       </div>
 
       {/* particles */}
-      <ParticlesComponent />
+      <ParticlesComponent isUsingBackground={false} />
+
+      <div className="w-full h-full fixed -z-20 top-0 right-0 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"/>
 
       {/* pop up */}
       <>
