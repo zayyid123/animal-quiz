@@ -91,7 +91,8 @@ const ActivePage = ({ searchParams }: { searchParams: { page: string } }) => {
   // Get active question
   useEffect(() => {
     const getActiveQuestion = () => {
-      const quizActive = localStorageManager.getFromLocalStorage("quiz_active");
+      const quizActive =
+        localStorageManager.getFromLocalStorage("quiz_active") || {};
       if (quizActive) {
         setActiveQuestion(quizActive);
       } else {
@@ -107,7 +108,9 @@ const ActivePage = ({ searchParams }: { searchParams: { page: string } }) => {
       }
     };
 
-    getActiveQuestion();
+    if (typeof window !== undefined) {
+      getActiveQuestion();
+    }
   }, []);
 
   useEffect(() => {
@@ -126,7 +129,7 @@ const ActivePage = ({ searchParams }: { searchParams: { page: string } }) => {
         });
         setIsOpenAlert(true);
         router.push("/active?page=final");
-        return
+        return;
       }
 
       const minutes = Math.floor(timeLeft / (1000 * 60));
