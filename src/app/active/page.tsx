@@ -125,14 +125,8 @@ const ActivePage = ({ searchParams }: { searchParams: { page: string } }) => {
           type: "danger",
         });
         setIsOpenAlert(true);
-        await handleSaveToDB();
-        router.push(
-          `/result/${
-            activeQuestion.name.split(" ").join("_") +
-            "_" +
-            activeQuestion.startDate.split(" ").join("_")
-          }`
-        );
+        router.push("/active?page=final");
+        return
       }
 
       const minutes = Math.floor(timeLeft / (1000 * 60));
