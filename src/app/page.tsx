@@ -159,14 +159,24 @@ export default function Home() {
 
           {/* card */}
           <div className="flex justify-start items-start gap-3">
-            {historyQuiz &&
-              historyQuiz.map((res, index) => (
-                <CardQuizHistory
-                  key={"QuizHistory" + index}
-                  dataQuiz={res.data}
-                  idQuiz={res.id}
-                />
-              ))}
+            {historyQuiz && (
+              <>
+                {historyQuiz.length !== 0 ? (
+                  <>
+                    {historyQuiz.map((res, index) => (
+                      <CardQuizHistory
+                        key={"QuizHistory" + index}
+                        dataQuiz={res.data}
+                        idQuiz={res.id}
+                        setisLoading={setisLoading}
+                      />
+                    ))}
+                  </>
+                ) : (
+                  <p className="text-center w-full">No Data</p>
+                )}
+              </>
+            )}
           </div>
         </div>
       </div>

@@ -1,6 +1,6 @@
 import { axiosInstance } from "@/config/axiosConfig";
 import { fbConfig } from "@/config/firebaseConfig";
-import { collection, doc, getDoc, getDocs, getFirestore } from "firebase/firestore";
+import { collection, deleteDoc, doc, getDoc, getDocs, getFirestore } from "firebase/firestore";
 
 // Inisialisasi Firestore
 const db = getFirestore(fbConfig);
@@ -48,5 +48,19 @@ export const getAllQuizzes = async (userId: string) => {
         return quizzes;
     } catch (e) {
         console.error("Error mengambil semua kuis: ", e);
+    }
+};
+
+export const deleteQuiz = async (userId: string, quizId: string) => {
+    try {
+        // Referensi dokumen: quiz/userId/userQuiz/quizId
+        const quizRef = doc(db, 'quiz', userId, 'userQuiz', quizId);
+
+        // Menghapus dokumen
+        await deleteDoc(quizRef);
+
+        console.log(`Quiz dengan ID ${quizId} berhasil dihapus.`);
+    } catch (e) {
+        console.error("Error menghapus kuis: ", e);
     }
 };
