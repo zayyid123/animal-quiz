@@ -1,4 +1,6 @@
 "use client";
+import Navbar from "@/components/Navbar";
+import ParticlesComponent from "@/components/ParticlesComponent";
 import { getQuizDetail } from "@/services/quiz.service";
 import CookieManager from "@/utils/CookieManager";
 import React, { useEffect } from "react";
@@ -17,7 +19,14 @@ const ResultPage = ({ params }: { params: { id: string } }) => {
     getDetailQuizFromDb();
   }, []);
 
-  return <div>ResultPage</div>;
+  return (
+    <div className="w-full h-full">
+      <Navbar />
+
+      {/* particles */}
+      <ParticlesComponent />
+    </div>
+  );
 };
 
 export default ResultPage;

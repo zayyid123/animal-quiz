@@ -54,7 +54,7 @@ const CardQuizHistory = ({
     >
       {/* head */}
       <div className="bg-gradient-to-r h-[100px] rounded-lg from-indigo-500 via-purple-500 to-pink-500 flex justify-center items-center hover:scale-105 ease-in-out duration-300">
-        <div className="text-white font-bold text-xl capitalize">
+        <div className="text-white font-bold text-xl capitalize whitespace-nowrap overflow-hidden text-ellipsis max-w-[100px]">
           {dataQuiz.name}
         </div>
       </div>

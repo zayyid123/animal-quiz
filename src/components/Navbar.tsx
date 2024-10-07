@@ -66,9 +66,16 @@ const Navbar = () => {
 
   return (
     <div className="sticky top-0 w-full glass shadow-lg py-4 px-3 flex justify-between items-center">
-      <p className="text-xl text-center font-bold leading-tight tracking-tight text-white drop-shadow md:text-2xl">
-        Animal<span className="text-primary-600">Quizz</span>
-      </p>
+      <div
+        onClick={() => {
+          router.push("/");
+        }}
+        className="cursor-pointer"
+      >
+        <p className="text-xl text-center font-bold leading-tight tracking-tight text-white drop-shadow md:text-2xl">
+          Animal<span className="text-primary-600">Quizz</span>
+        </p>
+      </div>
 
       <div>
         {/* user */}
@@ -80,7 +87,9 @@ const Navbar = () => {
             <p className="text-lg text-right text-white font-semibold whitespace-nowrap overflow-hidden text-ellipsis max-w-[100px] capitalize">
               User
             </p>
-            <p className="text-xs text-white whitespace-nowrap overflow-hidden text-ellipsis max-w-[70px]">{userData?.email}</p>
+            <p className="text-xs text-white whitespace-nowrap overflow-hidden text-ellipsis max-w-[70px]">
+              {userData?.email}
+            </p>
           </div>
           <div className="w-10 h-10 overflow-hidden rounded-full bg-primary-700 flex justify-center items-center">
             <Image
