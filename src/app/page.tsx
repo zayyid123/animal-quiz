@@ -158,7 +158,7 @@ export default function Home() {
           </p>
 
           {/* card */}
-          <div className="flex justify-start items-start gap-3">
+          <div className="flex lg:justify-start justify-center items-start flex-wrap gap-3">
             {historyQuiz && (
               <>
                 {historyQuiz.length !== 0 ? (
