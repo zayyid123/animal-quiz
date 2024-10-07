@@ -149,7 +149,7 @@ const ActivePage = ({ searchParams }: { searchParams: { page: string } }) => {
 
   return (
     <div className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 w-full h-full min-h-screen pt-4">
-      <div className="w-full h-full flex justify-center items-center flex-col gap-y-2">
+      <div className="w-full h-screen flex justify-center items-center flex-col gap-y-2">
         <div className="w-[96%] max-w-[1080px] mb-2 flex justify-between items-center gap-x-3">
           <div className="bg-slate-800 w-full h-16 rounded-lg">
             <div
@@ -184,13 +184,13 @@ const ActivePage = ({ searchParams }: { searchParams: { page: string } }) => {
 
         <div
           key={JSON.stringify(searchParams.page)}
-          className="glass w-[96%] h-full mb-4 p-5 rounded-lg text-white max-w-[1080px]"
+          className="glass w-[96%] h-fit mb-4 p-5 rounded-lg text-white max-w-[1080px]"
         >
           {activeQuestion && searchParams.page ? (
             <>
               {searchParams.page !== "final" ? (
                 <>
-                  <div className="bg-white rounded-lg text-slate-700 p-3">
+                  <div className="bg-white rounded-lg text-slate-700 p-3 mb-3">
                     {parseInt(searchParams.page)}.{" "}
                     {
                       activeQuestion.allAnswerAndQuestion[
@@ -198,7 +198,7 @@ const ActivePage = ({ searchParams }: { searchParams: { page: string } }) => {
                       ].question
                     }
                   </div>
-                  <div className="flex flex-wrap justify-center mt-2 gap-2 h-full">
+                  <div className="flex flex-wrap justify-center items-center gap-2 h-fit">
                     {activeQuestion.allAnswerAndQuestion[
                       parseInt(searchParams.page) - 1
                     ].answer.map((res, index) => (
