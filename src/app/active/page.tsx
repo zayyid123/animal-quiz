@@ -91,7 +91,8 @@ const ActivePage = ({ searchParams }: { searchParams: { page: string } }) => {
   // Get active question
   useEffect(() => {
     const getActiveQuestion = () => {
-      const quizActive = localStorageManager.getFromLocalStorage("quiz_active") || {};
+      const quizActive =
+        localStorageManager.getFromLocalStorage("quiz_active") || {};
       if (quizActive) {
         setActiveQuestion(quizActive);
       } else {
@@ -146,8 +147,6 @@ const ActivePage = ({ searchParams }: { searchParams: { page: string } }) => {
     return () => clearInterval(timerInterval);
   }, [activeQuestion?.endDate]);
 
-  console.log(activeQuestion)
-
   return (
     <div className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 w-full h-full min-h-screen pt-4">
       <div className="w-full h-full flex justify-center items-center flex-col gap-y-2">
@@ -184,7 +183,7 @@ const ActivePage = ({ searchParams }: { searchParams: { page: string } }) => {
         </div>
 
         <div
-          key={JSON.stringify(activeQuestion)}
+          key={JSON.stringify(searchParams.page)}
           className="glass w-[96%] h-full mb-4 p-5 rounded-lg text-white max-w-[1080px]"
         >
           {activeQuestion && searchParams.page ? (
