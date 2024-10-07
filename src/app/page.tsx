@@ -136,6 +136,14 @@ export default function Home() {
       sethistoryQuiz(res);
     };
 
+    const checkIsActiveQuizExist = () => {
+      const quizActive = localStorageManager.getFromLocalStorage("quiz_active");
+      if (quizActive) {
+        router.push("/active?page=1");
+      }
+    };
+
+    checkIsActiveQuizExist();
     getAlluizFromDb();
   }, []);
 
