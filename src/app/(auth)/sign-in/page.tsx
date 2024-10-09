@@ -47,7 +47,7 @@ const SignInPage = () => {
           type: "success",
         });
         setisOpenAlert(true);
-        console.log(user)
+        console.log(user);
         cookieManager.setCookie("access_token", user, 1);
         setTimeout(() => {
           router.push("/");
@@ -66,6 +66,7 @@ const SignInPage = () => {
   return (
     <section className="h-screen">
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto h-screen lg:py-0">
+        <div className="mb-3 text-3xl font-bold bg-white px-4 py-2 rounded-lg">Ini Dev</div>
         <div className="w-full glass rounded-[20px] md:mt-0 sm:max-w-md xl:p-0 shadow">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
             <h1 className="text-xl text-center font-bold leading-tight tracking-tight text-white drop-shadow md:text-2xl">
